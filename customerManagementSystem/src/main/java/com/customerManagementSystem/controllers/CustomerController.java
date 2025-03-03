@@ -7,12 +7,17 @@ import com.customerManagementSystem.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
+
+ OrdersBusinessInterface service;
+	Logger logger = LoggerFactory.getLogger(CustomerController.class);
  
  @Autowired
  private CustomerService customerService;
@@ -34,6 +39,9 @@ public class CustomerController {
  // POST create new customer
  @PostMapping
  public Customer createCustomer(@RequestBody Customer customer) {
+
+     //Log the API call
+		   logger.info("Entering UserController.addUser()");
      return customerService.createCustomer(customer);
  }
 
